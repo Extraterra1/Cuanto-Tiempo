@@ -1,0 +1,101 @@
+doctype html
+//
+  Paradigm Shift by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+head
+  title CuantoTiempo
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+  meta(name='description' content='')
+  meta(name='keywords' content='')
+  link(rel='stylesheet' href='assets/css/main.css')
+  link(rel='icon' type='image/png' href='../images/favicon.png')
+// Wrapper
+#wrapper
+  // Intro
+  section.intro
+    header
+      h1
+        a#mainTitle(href='/') &iquest;Cuanto Tiempo?
+      p
+        | Descubre cuanto tiempo tardarias en ver tu serie favorita
+      ul.actions
+        li
+          a.arrow.scrolly(href='#first')
+            span.label Next
+    .content
+      span.image.fill(data-position='center')
+        img(src='images/nightking.jpg' alt='')
+  // Section
+  section#first
+    header
+      h2 Busqueda
+    .content
+      form(method='GET' action='/search#first')
+        .fields
+          .field
+            label(for='demo-name') Escribe una serie
+            input#demo-name(type='text' name='q' value=`${query}` placeholder='Breaking Bad')
+        ul.actions
+          li
+            input.primary(type='submit' value='Buscar')
+  // Section
+  section
+    header
+      h2 Resultados
+    .content
+      p
+        | Encontramos
+        strong=` ${totalResults}`
+        |  resultados de acuerdo a tu busqueda "#{query}", mostrando pagina 
+        strong=page
+        |
+        | de 
+        strong=totalPages
+      // Section
+      section
+        .content
+          #searchbox
+              ul.icons
+                - var n = 1
+                while n <= totalPages
+                  li
+                    a(href=`/search?q=${query}&page=${n}#first`)
+                      if n === page
+                        span.label
+                        |
+                        strong=n++
+                      else
+                        span.label=n++
+                        
+                        
+          .gallery
+            each item in results
+              a(href=`/show/${item.id}#overview`)
+                if item.poster_path
+                  img(src=`https://image.tmdb.org/t/p/w300/${item.poster_path}` alt=`${item.original_name}`)
+                  p.searchItemCenter=item.original_name
+                else
+                  img(src=`images/noposter.jpg` alt=`${item.original_name}`)
+                  p.searchItemCenter=item.original_name
+          #searchbox
+              ul.icons
+                - var n = 1
+                while n <= totalPages
+                  li
+                    a(href=`/search?q=${query}&page=${n}#first`)
+                      if n === page
+                        span.label
+                        |
+                        strong=n++
+                      else
+                        span.label=n++
+
+    // Scripts
+    script(src='assets/js/jquery.min.js')
+    script(src='assets/js/jquery.scrolly.min.js')
+    script(src='assets/js/browser.min.js')
+    script(src='assets/js/breakpoints.min.js')
+    script(src='assets/js/util.js')
+    script(src='assets/js/main.js')

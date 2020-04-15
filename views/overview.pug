@@ -1,0 +1,121 @@
+doctype html
+//
+  Paradigm Shift by HTML5 UP
+  html5up.net | @ajlkn
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+head
+  title CuantoTiempo
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+  meta(name='description' content='')
+  meta(name='keywords' content='')
+  link(rel='stylesheet' href='../assets/css/main.css')
+  link(rel='icon' type='image/png' href='../images/favicon.png')
+// Wrapper
+#wrapper
+  // Intro
+  section.intro
+    header
+      h1 
+        a#mainTitle(href='/') &iquest;Cuanto Tiempo?
+      p
+        | Descubre cuanto tiempo tardarias en ver tu serie favorita
+      ul.actions
+        li
+          a.arrow.scrolly(href='#overview')
+            span.label Next
+    .content
+      span.image.fill(data-position='center')
+        if show.backdrop_path
+          img(src=`https://image.tmdb.org/t/p/w780/${show.backdrop_path}` alt='')
+        else
+          img(src=`../images/pic01.jpg` alt='')
+  
+  // Section
+  section#overview
+    header
+      if show.number_of_seasons > 1
+        h2.overviewHeader Ver las #{show.number_of_seasons} temporadas de #{show.original_name} te tomaria
+      else
+        h2.overviewHeader Ver la unica temporada de #{show.name} te tomaria
+      if hours > 0 || minutes > 0
+        h2.searchItemCenter#totalTime=`${hours} horas y ${minutes} minutos.`
+      else
+        h2.searchItemCenter#totalTime=`Sin informacion`
+    .content
+      p=`${show.overview.substring(0,200)}...`
+      ul.feature-icons
+        if show && show.created_by[0]
+          li.icon.solid.fa-user(title='Creado Por')=show.created_by[0].name
+        else
+          li.icon.solid.fa-user(title='Creado Por') Sin Informacion
+        li.icon.solid.fa-calendar(title='Primer Episodio')=show.first_air_date
+        if show.episode_run_time[0] > 0
+          li.icon.solid.fa-clock(title='Duracion media de episodio')=`${show.episode_run_time[0]} minutos`
+        else
+          li.icon.solid.fa-clock(title='Duracion media de episodio')=`Sin Informacion`
+        if show.number_of_seasons > 1
+          li.icon.solid.fa-book(title='Numero de temporadas')=`${show.number_of_seasons} temporadas`
+        else
+          li.icon.solid.fa-book(title='Numero de temporadas')=`${show.number_of_seasons} temporada`
+        li.icon.solid.fa-tv(title='Numero de episodios')=`${show.number_of_episodes} episodios en total`
+        li.icon.solid.fa-star(title='Rating')=`${show.vote_average}/10`
+      p
+        a.button.primary.large(href=`https://www.themoviedb.org/tv/${show.id}`) MovieDB
+
+
+
+  // Section
+  section#first
+    header
+      h2 Busqueda
+    .content
+      form(method='GET' action='/search#first')
+        .fields
+          .field
+            label(for='demo-name') Escribe una serie
+            input#demo-name(type='text' name='q' value='' placeholder='Breaking Bad')
+        ul.actions
+          li
+            input.primary(type='submit' value='Buscar')
+            
+      // Section
+      section
+        header
+          h2 Contactanos
+        .content
+          p
+            strong Siempre
+            |  estamos disponibles para resolver cualquier duda o problema.
+          form
+            .fields
+              .field.half
+                input#name(type='text' name='name' placeholder='Nombre')
+              .field.half
+                input#email(type='email' name='email' placeholder='Email')
+              .field
+                textarea#message(name='message' placeholder='Mensaje' rows='7')
+            ul.actions
+              li
+                input.button.primary(type='submit' value='Enviar Mensaje')
+        footer
+          ul.items
+            li
+              h3 Email
+              a(href='mailto:cpiresdev@gmail.com') cpiresdev@gmail.com
+            li
+              h3 Otros
+              ul.icons
+                li
+                  a.icon.brands.fa-twitter(href='https://twitter.com/terraextra')
+                    span.label Twitter
+                li
+                  a.icon.brands.fa-github(href='https://github.com/Extraterra1')
+                    span.label GitHub
+    // Scripts
+    script(src='../assets/js/jquery.min.js')
+    script(src='../assets/js/jquery.scrolly.min.js')
+    script(src='../assets/js/browser.min.js')
+    script(src='../assets/js/breakpoints.min.js')
+    script(src='../assets/js/util.js')
+    script(src='../assets/js/main.js')
