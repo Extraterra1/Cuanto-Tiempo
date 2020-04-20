@@ -13,6 +13,10 @@ app.get("/search", apiController.search);
 
 app.get("/show/:showId", apiController.getLength);
 
+app.get("*", function (req, res) {
+  res.status(404).render("404");
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server listening");
 });
