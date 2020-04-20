@@ -10,7 +10,7 @@ head
   meta(name='description' content='')
   meta(name='keywords' content='')
   link(rel='stylesheet' href='assets/css/main.css')
-  link(rel='icon' type='image/png' href='../images/favicon.png')
+  link(rel='icon' type='image/png' href='images/favicon.png')
 // Wrapper
 #wrapper
   // Intro
@@ -74,11 +74,11 @@ head
             each item in results
               a(href=`/show/${item.id}#overview`)
                 if item.poster_path
-                  img(src=`https://image.tmdb.org/t/p/w300/${item.poster_path}` alt=`${item.original_name}`)
-                  p.searchItemCenter=item.original_name
+                  img(src=`https://image.tmdb.org/t/p/w300/${item.poster_path}` alt=`${item.name}`)
+                  p.searchItemCenter=item.name
                 else
-                  img(src=`images/noposter.jpg` alt=`${item.original_name}`)
-                  p.searchItemCenter=item.original_name
+                  img(src=`images/noposter.jpg` alt=`${item.name}`)
+                  p.searchItemCenter=item.name
           #searchbox
               ul.icons
                 - var n = 1

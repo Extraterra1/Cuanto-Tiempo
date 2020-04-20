@@ -19,6 +19,9 @@ exports.renderIndex = (req, res) => {
 };
 
 exports.search = (req, res) => {
+  if (!req.query.q) {
+    req.query.q = " ";
+  }
   var page = 1;
   if (req.query.page) {
     page = req.query.page;
